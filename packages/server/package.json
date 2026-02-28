@@ -1,19 +1,22 @@
 {
-  "name": "@reshipaku/server",
-  "version": "1.0.0",
-  "private": true,
-  "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy"
-  },
-  "dependencies": {
-    "@ai-sdk/google": "^3.0.34",
-    "ai": "^6.0.105",
-    "hono": "^4.12.3"
-  },
-  "devDependencies": {
-    "@cloudflare/workers-types": "^4.20260305.0",
-    "typescript": "^5.9.3",
-    "wrangler": "^4.14.1"
-  }
+	"name": "@reshipaku/server",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "wrangler dev",
+		"deploy": "wrangler deploy",
+		"check": "biome check",
+		"format": "biome check --fix"
+	},
+	"dependencies": {
+		"@ai-sdk/google": "^3.0.34",
+		"ai": "^6.0.105",
+		"hono": "^4.12.3"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^2.4.4",
+		"@cloudflare/workers-types": "^4.20260305.0",
+		"typescript": "^5.9.3",
+		"wrangler": "^4.14.1"
+	}
 }
