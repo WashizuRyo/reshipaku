@@ -8,17 +8,29 @@ on:
 
 jobs:
   typecheck:
-    name: Type Check
     runs-on: ubuntu-latest
+
     steps:
-      - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
-      - run: pnpm install --frozen-lockfile --ignore-scripts
-      - run: pnpm --filter @reshipaku/server exec biome check
-      - run: pnpm --filter @reshipaku/client exec biome check
-      - run: pnpm --filter @reshipaku/server exec tsc --noEmit
-      - run: pnpm --filter @reshipaku/client exec tsc --noEmit
+
+      - name: Setup Biome
+        uses: biomejs/setup-biome@v2
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Lint and format
+        run: biome ci .
+
+      - name: Type check
+        run: pnpm -r exec tsc --noEmit
